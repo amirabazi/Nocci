@@ -1,0 +1,30 @@
+# Swift generated files
+.build/
+.swiftpm/
+DerivedData/
+
+# macOS and editor files
+.DS_Store
+*.xcuserstate
+xcuserdata/
+.vscode/
+
+# Distribution artifacts belong in GitHub Releases
+*.app/
+*.zip
+dist/
+
+# Local credentials, configuration, and diagnostics
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+*.log
+# Signing material: the Sparkle private key must never reach the repository
+*.pem
+*.p12
+*.key
+*private-key*
+
+# Brainstorming mockups
+.superpowers/

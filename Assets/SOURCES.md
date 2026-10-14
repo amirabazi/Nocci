@@ -1,0 +1,16 @@
+# Provider artwork
+
+The marks identify the providers whose usage is displayed. They are not Nocci's own branding, and do not imply affiliation or endorsement. They are not covered by Nocci's Apache-2.0 licence: each remains its owner's trademark, used under that owner's terms.
+
+- **Claude:** the unchanged orange (#D97757) standalone mark from the first path of Claude Code's official documentation logo, isolated from the adjacent wordmark without changing its geometry. Original: https://mintcdn.com/claude-code/c5r9_6tjPMzFdDDT/logo/dark.svg ; source page: https://code.claude.com/docs/en/overview . Trademark owned by Anthropic.
+- **OpenAI:** the unmodified white Blossom SVG from the official logo pack, preserving the original 721 × 721 artboard and clear space. Original pack: https://cdn.openai.com/brand/OpenAI-Logos-2025.zip ; guidelines: https://openai.com/brand/ . Trademark owned by OpenAI. Shown next to Codex to identify its provider.
+- **GitHub:** the unmodified white Invertocat, `GitHub_Invertocat_White.svg` and `GitHub_Invertocat_White.pdf` from the official logo pack (the variant without built-in clear space), downloaded on 22 September 2026. The PDF is GitHub's own, not a conversion. Original pack: https://brand.github.com/GitHub_Logos.zip ; guidelines: https://brand.github.com/foundations/logo . Trademark owned by GitHub. Shown in the pull request filter to say which list comes from GitHub, which its guidelines permit for a project that integrates with GitHub.
+- **GitLab:** the full-colour tanuki logomark from the official press kit, downloaded on 22 September 2026. Its paths and colours are unchanged; only the artboard was tightened from 380 × 380 to the 156 × 156 square around the mark (viewBox `112 112 156 156`), the same isolation used for the Claude mark, so it renders at icon size beside the other marks. The UI keeps space around it. Original: https://about.gitlab.com/images/press/gitlab-logo-500-rgb.svg ; press kit: https://about.gitlab.com/press/press-kit/ ; trademark guidelines: https://handbook.gitlab.com/handbook/marketing/brand-and-product-marketing/brand/brand-activation/trademark-guidelines/ . Trademark owned by GitLab. Shown in the pull request filter to say which list comes from GitLab.
+
+The SVG sources are included here. Their PDF counterparts preserve vector paths and are bundled in the app for native macOS rendering. The logos are not template images and are not tinted by the UI. No network request is made to load them at runtime.
+
+PDF conversion used svglib and ReportLab (build-time only); the GitLab PDF used svglib 2.2.0 and ReportLab 5.0.1. The GitHub PDF needed no conversion. Both SVG and PDF assets are committed deliverables; rebuilding the app requires no conversion dependencies.
+
+# App icon
+
+`AppIcon.icns` is Nocci's own artwork, drawn by `Scripts/app-icon.swift` on 27 September 2026: a black notch, with its concave flares, hanging from the top of a dark slate screen, with a white and an orange usage ring beside the camera, like the compact strip's rings. It uses no provider mark and is covered by the project's Apache-2.0 licence. Every size in the file is drawn from the vector shapes rather than scaled down. To change it, edit the script and run the two commands in its header comment; the `.icns` is committed so a build needs no drawing step.
