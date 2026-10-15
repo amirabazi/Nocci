@@ -64,7 +64,8 @@ if [[ "$NOTARIZE" == "1" ]]; then
 fi
 
 ditto -c -k --sequesterRsrc --keepParent "$APP" "$FINAL_ZIP"
-shasum -a 256 "$FINAL_ZIP" > "$FINAL_ZIP.sha256"
+# Name the bare archive, so `shasum -c` works wherever the two files are downloaded.
+(cd dist && shasum -a 256 "$BASENAME.zip") > "$FINAL_ZIP.sha256"
 # generate_appcast pairs notes with an archive by matching basename.
 cp "$NOTES" "dist/$BASENAME.md"
 
