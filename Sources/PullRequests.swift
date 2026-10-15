@@ -227,8 +227,8 @@ enum PullRequestFailure: Error, Equatable {
                 ? "Not signed in to github.com. Run gh auth login in Terminal."
                 : "Not signed in to \(target.host). Run glab auth login --hostname \(target.host) in Terminal."
         case .timeout: return "\(target.host) took too long to respond."
-        case .unreachable: return "Couldn't reach \(target.host)."
-        case .unreadable: return "\(target.host) sent a response Nocci couldn't read."
+        case .unreachable: return "Couldn’t reach \(target.host)."
+        case .unreadable: return "\(target.host) sent a response Nocci couldn’t read."
         }
     }
 

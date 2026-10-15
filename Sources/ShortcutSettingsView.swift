@@ -111,7 +111,7 @@ struct ShortcutSettingsTile: View {
 
     var body: some View {
         SettingsTile("Keyboard Shortcuts", glyph: .symbol("keyboard"),
-                     footer: "These work in any app. Open the notch keeps it open for a few seconds, or for as long as the pointer is on it; press it again to close. Go to the session brings forward the first session in the Sessions tab. While recording, Delete clears a shortcut and Escape cancels. Nocci sees only these key presses and needs no permission for them.") {
+                     footer: "These work in any app. “Open the notch” keeps it open for a few seconds, or for as long as the pointer is on it; press it again to close. “Go to the session that needs you” brings forward the first session in the Sessions tab. While recording, Delete clears a shortcut and Escape cancels. Nocci sees only these key presses and needs no permission for them.") {
             ForEach(Array(ShortcutAction.allCases.enumerated()), id: \.element) { index, action in
                 if index > 0 { Hairline() }
                 row(action)

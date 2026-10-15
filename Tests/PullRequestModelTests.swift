@@ -127,12 +127,12 @@ struct PullRequestModelTests {
         check(fetches.count == 10, "Both hosts are asked on schedule")
         fetches[9].done(answer([pr(5, host: "gitlab.com", forge: .gitlab)], truncated: true))
         fetches[8].done(answer([pr(1)]))
-        check(model.groups.count == 2 && model.groups.contains { $0.title == "g/p · gitlab.com" } && model.truncated,
+        check(model.groups.count == 2 && model.groups.contains { $0.title == "g/p · gitlab.com" } && !model.truncatedTargets.isEmpty,
               "GitLab rows join the list under their host, and a full page is flagged")
         settings = model.settings
         settings.gitlabHosts = []
         model.settings = settings
-        check(model.groups.count == 1 && !model.truncated && model.failures[gitlab] == nil,
+        check(model.groups.count == 1 && model.truncatedTargets.isEmpty && model.failures[gitlab] == nil,
               "Removing a host drops its rows at once")
         fetches[10].done(answer([pr(1)]))
 
@@ -224,7 +224,7 @@ struct PullRequestModelTests {
               "Switching runs no CLI and is remembered")
         model.filter = .gitlab
         check(model.visibleCount == 1 && model.visibleTruncated && model.visibleTargets == [gitlab], "GitLab shows only GitLab")
-        check(model.groups.count == 2 && model.truncated, "The full list is kept underneath")
+        check(model.groups.count == 2 && !model.truncatedTargets.isEmpty, "The full list is kept underneath")
         var githubOnly = model.settings
         githubOnly.gitlabHosts = []
         model.settings = githubOnly
@@ -438,7 +438,7 @@ struct PullRequestModelTests {
               "A notification never carries the title")
         let failed = PullRequestEvent(kind: .checksFailed, item: item(9, [.authored], .failing))
         check(PullRequestWatch.messages(three + [failed], notifications: both)
-                == [AlertMessage(provider: .codex, title: "Pull requests", body: "3 review requests and 1 finished check",
+                == [AlertMessage(title: "Pull requests", body: "3 review requests and 1 finished check",
                                  identifier: "nocci.pullRequest.summary")], "More than three become one summary")
         check(PullRequestWatch.messages(three + [failed], notifications: PullRequestNotifications(reviews: false, checks: true))
                 .map(\.title) == ["Checks failed"], "Only the switched-on kinds notify")

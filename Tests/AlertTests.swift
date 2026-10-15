@@ -70,7 +70,7 @@ struct AlertTests {
             state: providerSpecific,
             readings: [reading(60), reading(60, provider: .codex)],
             thresholdsByProvider: customThresholds, now: now)
-        check(providerSpecificResult.messages.map(\.provider) == [.codex],
+        check(providerSpecificResult.messages.map(\.title) == [AlertProvider.codex.title],
               "Claude and Codex use independent threshold lists")
 
         let customNoReset = AlertState(windows: ["claude.session":
@@ -139,7 +139,7 @@ struct AlertTests {
                                 readings: [reading(91),
                                            reading(91, provider: .codex)], now: now)
         check(separate.messages.count == 2, "Different providers are never coalesced together")
-        check(separate.messages.map(\.provider) == [.claude, .codex], "Provider messages keep a stable order")
+        check(separate.messages.map(\.title) == [AlertProvider.claude.title, AlertProvider.codex.title], "Provider messages keep a stable order")
 
         // MARK: Out-of-range usage and untouched windows
         //

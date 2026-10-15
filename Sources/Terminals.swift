@@ -26,7 +26,7 @@ enum TerminalRules {
     static let notchFontSize: Double = 11
     static let fontSizes: ClosedRange<Double> = 9...24
     static let fontSizeKey = "terminal.fontSize"
-    static let startFailure = "Couldn't start the session."
+    static let startFailure = "Couldn’t start the session."
     /// Codex's own terminal notifications, turned on for a Nocci tab only.
     /// Keys and values checked against codex-cli 0.155.0-alpha.16.3.
     static let codexNotificationFlags = "-c tui.notifications=true -c tui.notification_method=osc9 -c tui.notification_condition=always"

@@ -179,7 +179,7 @@ struct SettingsView: View {
         SettingsPage {
             ClaudeSetupSection(state: claudeState, model: model)
             SettingsTile("Codex", glyph: .mark("openai"),
-                         footer: "Sign in to this executable with your ChatGPT subscription. Usage refreshes about once a minute.") {
+                         footer: "Sign in to Codex with your ChatGPT subscription first (codex login in Terminal). Usage refreshes about once a minute.") {
                 SettingsValue("Executable", settingsState.executablePath ?? "Not found",
                               help: settingsState.executablePath ?? "Choose your installed codex executable.")
                 if ProcessInfo.processInfo.environment["NOCCI_CODEX_PATH"] != nil {
@@ -241,7 +241,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            SettingsTile("Compact notch", glyph: .symbol("rectangle.topthird.inset.filled"),
+            SettingsTile("Compact Notch", glyph: .symbol("rectangle.topthird.inset.filled"),
                          footer: "Each provider has its own window. Automatic shows the session window and falls back to weekly. A window the provider did not report shows a dash rather than another quota. This applies when both providers are shown; with one provider the notch shows both of its windows.") {
                 compactWindowPicker("Claude", mark: "claude", selection: $model.preferences.claudeWindow)
                 Hairline()
@@ -260,7 +260,7 @@ struct SettingsView: View {
                 SettingsToggle("Hide in full screen", isOn: $model.preferences.hideInFullScreen)
             }
             SettingsTile("Pace", glyph: .symbol("speedometer"),
-                         footer: "Adds a quiet line to each card estimating whether usage is on track to exhaust an allowance before it resets. It is an estimate from recent percentage changes, not a prediction, and it needs about thirty minutes of observations after launch before it can say anything.") {
+                         footer: "Adds a quiet line to each card estimating whether usage is on track to exhaust an allowance before it resets, and a small mark above each bar showing how much of the window has passed. The line is only an estimate from recent percentage changes, and it needs about thirty minutes of observations after launch before it can say anything.") {
                 SettingsToggle("Estimate whether an allowance will last", isOn: $model.preferences.showPace)
             }
         }

@@ -32,7 +32,7 @@ final class LoginItemService: ObservableObject {
         case .enabled: return "Nocci will open automatically when you log in."
         case .requiresApproval: return "Allow Nocci in System Settings to finish enabling launch at login."
         case .notRegistered: return "Open Nocci automatically when you log in to your Mac."
-        case .notFound: return "macOS couldn’t find this app’s login registration. Try enabling it again from a stable app location."
+        case .notFound: return "macOS couldn’t find Nocci’s login registration. Try enabling it again from a stable app location."
         @unknown default: return "Login status is unavailable. Check System Settings."
         }
     }

@@ -84,17 +84,17 @@ struct CodeReviewModelTests {
         programs[.claude] = nil
         usage.expand(true)
         check(!model.programFound && !model.canReview
-              && model.help == "Claude Code wasn't found. Choose it in Settings › Projects.",
+              && model.help == "Claude Code wasn’t found. Choose it in Settings › Projects.",
               "Opening the panel on the tab checks again, and a missing program says where to choose it")
         click(pr(1))
-        check(problems == ["Claude Code wasn't found. Choose it in Settings › Projects."] && pending.isEmpty && starts.isEmpty,
+        check(problems == ["Claude Code wasn’t found. Choose it in Settings › Projects."] && pending.isEmpty && starts.isEmpty,
               "A click without the program explains and starts nothing")
         problems = []
         model.settings.agent = .codex
         check(model.programFound && model.help == "Code review with Codex (experimental)", "Changing the agent checks its program")
         programs[.codex] = nil
         model.checkProgram()
-        check(model.help == "Codex wasn't found. Choose it in Settings › Providers.", "Codex's program is chosen in Providers")
+        check(model.help == "Codex wasn’t found. Choose it in Settings › Providers.", "Codex's program is chosen in Providers")
         programs = [.claude: "/bin/claude", .codex: "/bin/codex"]
         model.settings.agent = .claude
         check(ReviewSettings.load(from: defaults).agent == .claude && model.programFound, "The agent is saved")
@@ -187,7 +187,7 @@ struct CodeReviewModelTests {
         model.settings.prompt = "a\u{0}b {url}"
         problems = []
         click(pr(42))
-        check(problems == ["This prompt contains a character that can't be passed on."], "A NUL character is refused")
+        check(problems == ["This prompt contains a character that can’t be passed on."], "A NUL character is refused")
         model.settings.prompt = ReviewSettings.defaultPrompt
 
         // MARK: A review folder that cannot be made
@@ -196,7 +196,7 @@ struct CodeReviewModelTests {
         problems = []
         click(pr(7, repo: "owner/other"))
         drain()
-        check(starts.isEmpty && problems == ["Nocci couldn't prepare the review folder."], "It is reported when it is needed")
+        check(starts.isEmpty && problems == ["Nocci couldn’t prepare the review folder."], "It is reported when it is needed")
         click(pr(42))
         drain()
         check(starts.map(\.folder) == ["/code/new"], "A found clone does not need it")

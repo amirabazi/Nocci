@@ -177,9 +177,9 @@ struct TerminalsTests {
         check(TerminalRules.startRefusal(folder: "/p", folderExists: false, program: "/c", prompt: "", agent: .claude)
               == "This folder no longer exists.", "A folder that has gone is refused")
         check(TerminalRules.startRefusal(folder: "/p", folderExists: true, program: nil, prompt: "", agent: .codex)
-              == "Codex wasn't found. Choose it in Settings › Providers.", "A missing program says where to choose it")
+              == "Codex wasn’t found. Choose it in Settings › Providers.", "A missing program says where to choose it")
         check(TerminalRules.startRefusal(folder: "/p", folderExists: true, program: "/c", prompt: "a\u{0}", agent: .claude)
-              == "This prompt contains a character that can't be passed on.", "The Projects prompt checks apply")
+              == "This prompt contains a character that can’t be passed on.", "The Projects prompt checks apply")
         check(TerminalRules.startRefusal(folder: "/p", folderExists: true, program: "/c", prompt: "-v please", agent: .claude) == nil,
               "A leading hyphen is passed on after --")
 

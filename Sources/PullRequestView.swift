@@ -39,7 +39,7 @@ struct PullRequestListView: View {
                             }
                         }
                         if model.visibleTruncated {
-                            Text("Only the \(PullRequestCommands.limit) most recent per role are shown.")
+                            Text("Only the \(PullRequestCommands.limit) most recent in each of Authored, Assigned and Review requested are shown.")
                                 .font(.caption).foregroundStyle(.secondary)
                         }
                     }
@@ -148,7 +148,7 @@ struct PullRequestRow: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(item.title), \(item.repo) \(item.reference)")
         .accessibilityValue("\(item.roleText), \(PullRequestAge.spoken(item.updated, at: now)), \(CheckGlyph.description(item.checks))")
-        .accessibilityHint(enabled ? "Opens in your browser" : sample ? "Sample data" : "Its link is on another host, so Nocci doesn't open it")
+        .accessibilityHint(enabled ? "Opens in your browser" : sample ? "Sample data" : "Its link is on another host, so Nocci doesn’t open it")
         .accessibilityAddTraits(.isLink)
     }
 }
@@ -243,7 +243,7 @@ struct PullRequestFooter: View {
             if let problem {
                 Image(systemName: "exclamationmark.circle")
                     .font(.system(size: 12)).foregroundStyle(.orange)
-                    .help(problem).accessibilityLabel("Couldn't update. \(problem)")
+                    .help(problem).accessibilityLabel("Couldn’t update. \(problem)")
             }
             Spacer()
             if model.refreshing {

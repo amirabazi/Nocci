@@ -238,7 +238,7 @@ struct ClaudeSessionModelTests {
         check(model.items.map(\.record.state) == [.permission, .waiting, .yourTurn], "A Codex wait joins the list at its urgency")
         check(model.labels[waitID] == "mobile", "A Codex wait is labelled by its tab")
         check(delivery.sent.count == sentBefore + 1 && delivery.sent.last?.title == "Codex" && delivery.sent.last?.body == "mobile needs you"
-              && delivery.sent.last?.provider == .codex && delivery.sent.last?.identifier == "nocci.session." + waitID,
+              && delivery.sent.last?.identifier == "nocci.session." + waitID,
               "A new Codex wait notifies once, naming only the tab")
         check(model.waitCount == countBefore + 1, "A new Codex wait bounces the notch")
         model.setHosting(ClaudeSessionHosting(live: [liveTab, codexTab], closed: [goneTab],

@@ -117,7 +117,7 @@ struct ProjectModelTests {
         // MARK: Composing
         let new = model.projects[0], old = model.projects[1]
         model.open(new)
-        check(model.selected == new && model.composing && model.prompt == "" && model.footerText == "Return starts · Esc goes back",
+        check(model.selected == new && model.composing && model.prompt == "" && model.footerText == "Return starts · Escape goes back",
               "Clicking a project opens the compose view")
         model.prompt = "fix the tests"
         model.endCompose()
@@ -201,7 +201,7 @@ struct ProjectModelTests {
         programs[.claude] = nil
         model.choose(target: .iterm)
         model.refreshAvailability()
-        check(model.statusLine == ProjectModel.StatusLine(text: "Claude Code wasn't found. Choose it in Settings › Projects.",
+        check(model.statusLine == ProjectModel.StatusLine(text: "Claude Code wasn’t found. Choose it in Settings › Projects.",
                                                           isProblem: true) && !model.canStart,
               "A missing program is explained before Start is pressed")
         model.start()
@@ -217,7 +217,7 @@ struct ProjectModelTests {
         model.choose(agent: .codex)
         programs[.codex] = nil
         model.refreshAvailability()
-        check(model.statusLine?.text == "Codex wasn't found. Choose it in Settings › Providers.",
+        check(model.statusLine?.text == "Codex wasn’t found. Choose it in Settings › Providers.",
               "A missing Codex points to where Codex is chosen")
         programs[.codex] = "/bin/codex"
         model.choose(agent: .claude)
@@ -234,11 +234,11 @@ struct ProjectModelTests {
         model.prompt = "x"
         answer = .failure(.notOpened)
         model.start()
-        check(model.status == "iTerm couldn't be opened." && model.selected == old && model.prompt == "x" && launches.count == 4,
+        check(model.status == "iTerm couldn’t be opened." && model.selected == old && model.prompt == "x" && launches.count == 4,
               "A failed start keeps composing with the reason")
         answer = .failure(.notPrepared)
         model.start()
-        check(model.status == "Nocci couldn't prepare the session." && launches.count == 5, "A script that could not be written is reported")
+        check(model.status == "Nocci couldn’t prepare the session." && launches.count == 5, "A script that could not be written is reported")
         answer = .success(())
 
         holding = true
@@ -396,7 +396,7 @@ struct ProjectModelTests {
         model.compose(new)
         programs[.claude] = nil
         model.refreshAvailability()
-        check(model.statusLine?.text == "Claude Code wasn't found. Choose it in Settings › Projects." && !model.canStart,
+        check(model.statusLine?.text == "Claude Code wasn’t found. Choose it in Settings › Projects." && !model.canStart,
               "Nocci needs the agent's program too")
         model.start()
         check(nocciStarts.count == 2, "Nothing starts without the program")

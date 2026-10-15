@@ -89,7 +89,7 @@ struct TerminalModelTests {
         programs[.codex] = nil
         model.draftAgent = .codex
         model.startDraft()
-        check(model.draftStatus == "Codex wasn't found. Choose it in Settings › Providers." && made.count == 2,
+        check(model.draftStatus == "Codex wasn’t found. Choose it in Settings › Providers." && made.count == 2,
               "A missing program is refused")
         programs[.codex] = "/bin/codex"
         model.draftPrompt = "  \n "

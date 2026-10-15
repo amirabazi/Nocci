@@ -256,7 +256,6 @@ struct ClaudeIntegrationTests {
         let restoreCase = prepared("restore", existing: "/usr/local/bin/mine --flag")
         let restorePreview = try! restoreCase.disconnectPlan()
         check(restorePreview.restoresCommand == "/usr/local/bin/mine --flag", "Disconnect preview names the command it restores")
-        check(restorePreview.conflictingCommand == nil, "An untouched install has no conflict")
         let restoreOutcome = try! restoreCase.disconnect(.restore)
         let restored = read(restoreCase.paths.settingsFile)
         check((restored["statusLine"] as? [String: Any])?["command"] as? String == "/usr/local/bin/mine --flag",
@@ -265,7 +264,7 @@ struct ClaudeIntegrationTests {
         check(restored["model"] as? String == "opus", "Disconnect preserves unrelated settings")
         check(!fm.fileExists(atPath: restoreCase.paths.wrapperFile.path), "Disconnect removes the wrapper")
         check(restoreCase.record() == nil, "Disconnect clears the install record")
-        check(restoreOutcome.restoredCommand == "/usr/local/bin/mine --flag" && !restoreOutcome.removedStatusLine,
+        check(restoreOutcome.restoredCommand == "/usr/local/bin/mine --flag",
               "Outcome reports the restored command")
 
         // MARK: Disconnect removes a status line it introduced
@@ -275,7 +274,7 @@ struct ClaudeIntegrationTests {
         let removedSettings = read(removeCase.paths.settingsFile)
         check(removedSettings["statusLine"] == nil, "Disconnect removes a status line we introduced")
         check(removedSettings["model"] as? String == "opus", "Removal preserves unrelated settings")
-        check(removeOutcome.removedStatusLine && removeOutcome.restoredCommand == nil, "Outcome reports the removal")
+        check(removeOutcome.restoredCommand == nil, "Outcome restores nothing when there was nothing to restore")
 
         // MARK: Settings changed after installation are preserved
 
@@ -298,8 +297,6 @@ struct ClaudeIntegrationTests {
         }
         let conflictCase = prepared("conflict", existing: "mine")
         replaceStatusLine(conflictCase, with: "/opt/other-statusline.sh")
-        let conflictPreview = try! conflictCase.disconnectPlan()
-        check(conflictPreview.conflictingCommand == "/opt/other-statusline.sh", "A replaced status line is reported as a conflict")
         var threw: ClaudeIntegrationError?
         do { _ = try conflictCase.disconnect(.restore) } catch let error as ClaudeIntegrationError { threw = error } catch {}
         check(threw == .conflictingStatusLine(current: "/opt/other-statusline.sh", installed: conflictCase.installedCommand),

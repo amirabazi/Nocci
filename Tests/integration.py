@@ -73,7 +73,7 @@ print(json.dumps({'id': first['id'], 'result': {}}), flush=True)
     env['NOCCI_CODEX_PATH'] = str(directory / 'missing-codex')
     invalid = subprocess.run([binary, '--check-codex', '-codexPath', str(mock)], text=True, capture_output=True, env=env, timeout=20)
     assert invalid.returncode != 0 and not invalid.stdout
-    assert "Codex wasn't found" in invalid.stderr
+    assert "Codex wasn’t found" in invalid.stderr
     # Claude Code hooks: every call exits 0 silently, whatever it receives.
     sessions = directory / 'Sessions'
     def hook(data, host=None, tab=None):

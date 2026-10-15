@@ -11,7 +11,7 @@ struct ClaudeSessionListView: View {
         Group {
             if model.items.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("No Claude Code session needs you.")
+                    Text("No session needs you.")
                         .font(.subheadline).foregroundStyle(.secondary)
                     Spacer(minLength: 0)
                 }

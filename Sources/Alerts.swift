@@ -133,7 +133,6 @@ struct AlertState: Codable, Equatable {
 }
 
 struct AlertMessage: Equatable {
-    var provider: AlertProvider
     var title: String
     var body: String
     var identifier: String
@@ -216,8 +215,7 @@ func evaluate(state: AlertState, readings: [AlertReading],
     // One notification per provider; two windows crossing together coalesce.
     let messages = AlertProvider.allCases.compactMap { provider -> AlertMessage? in
         guard let entries = parts[provider], !entries.isEmpty else { return nil }
-        return AlertMessage(provider: provider,
-                            title: provider.title,
+        return AlertMessage(title: provider.title,
                             body: entries.map(\.body).joined(separator: " · "),
                             identifier: entries.map(\.identifier).joined(separator: "+"))
     }

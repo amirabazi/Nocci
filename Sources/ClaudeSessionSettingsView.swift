@@ -10,7 +10,7 @@ struct ClaudeSessionSettingsForm: View {
     var body: some View {
         SettingsPage {
             SettingsTile("Claude Code Sessions", glyph: .symbol("terminal"),
-                         footer: "Shows in the notch when a Claude Code session needs your permission, asks you a question, or finishes its turn, in the terminal and in editors such as VS Code. Nocci adds hooks to your Claude settings after you review them. It keeps only each session's state, the time, its project folder's name and the app it runs in: never prompts, replies, tool details or transcripts.") {
+                         footer: "Shows in the notch when a Claude Code session needs your permission, asks you a question, or finishes its turn, in the terminal and in editors such as VS Code. Nocci adds hooks to your Claude settings after you review them. It keeps only each session’s state, the time, its project folder’s name and the app it runs in: never prompts, replies, tool details or transcripts.") {
                 SettingsValue("Status", statusText, tint: statusIsProblem ? .orange : .secondary, path: false)
                 HStack {
                     if model.enabled {
@@ -46,7 +46,7 @@ struct ClaudeSessionSettingsForm: View {
         .sheet(isPresented: $settingsState.reviewingSessions) {
             ClaudeSessionReviewSheet(model: model, settingsState: settingsState)
         }
-        .alert("Turn off session status?", isPresented: $settingsState.confirmingSessionsOff) {
+        .alert("Turn off Claude Code sessions?", isPresented: $settingsState.confirmingSessionsOff) {
             Button("Turn Off", role: .destructive, action: turnOff)
             Button("Cancel", role: .cancel) {}
         } message: {
@@ -98,7 +98,7 @@ struct ClaudeSessionReviewSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            SheetHeader(title: model.enabled ? "Reinstall Claude Code session status" : "Turn on Claude Code session status",
+            SheetHeader(title: model.enabled ? "Reinstall Claude Code sessions" : "Turn on Claude Code sessions",
                         subtitle: "Nothing is written until you choose \(button). Your own hooks and every other setting are kept.",
                         glyph: .symbol("terminal"))
                 .padding(20)

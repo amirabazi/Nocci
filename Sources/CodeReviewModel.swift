@@ -47,7 +47,7 @@ final class CodeReviewModel: ObservableObject {
     typealias Executor = (@escaping () -> Void) -> Void
     typealias Scan = ([String]) -> DiscoveryResult
 
-    static let folderFailure = "Nocci couldn't prepare the review folder."
+    static let folderFailure = "Nocci couldn’t prepare the review folder."
     /// A second click on the same
     /// pull request within this long of that pull request's review starting
     /// is ignored. A different row starts at once.

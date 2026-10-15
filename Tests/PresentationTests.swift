@@ -28,8 +28,8 @@ struct PresentationTests {
         let manual = PresentationState.untilEnded
         check(manual.isActive(at: now) && manual.isActive(at: now.addingTimeInterval(86_400 * 365)),
               "An open-ended session never lapses on its own")
-        check(!manual.isTimed, "An open-ended session is not a timed one")
-        check(hour.isTimed, "A timed session knows it is timed")
+        check(manual.until == .distantFuture, "An open-ended session is not a timed one")
+        check(hour.until != nil && hour.until != .distantFuture, "A timed session has a real expiry")
 
         // Persistence: an absolute expiry, so a relaunch resumes or restores.
         let suiteName = "notch-presentation-tests-" + UUID().uuidString

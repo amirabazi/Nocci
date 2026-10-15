@@ -23,11 +23,6 @@ struct PresentationState: Equatable {
         return now < until
     }
 
-    var isTimed: Bool {
-        guard let until else { return false }
-        return until != .distantFuture
-    }
-
     func menuDescription(at now: Date) -> String {
         guard let until else { return "Off" }
         guard until != .distantFuture else { return "On until you end it" }

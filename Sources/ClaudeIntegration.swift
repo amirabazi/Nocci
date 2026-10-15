@@ -192,7 +192,7 @@ enum ClaudeConnection: Equatable {
         case .connectedWithoutLimits:
             return "Claude Code ran the bridge but sent no rate limits. Usage requires Claude Code 2.1.251 or later, a supported subscription, and a completed response in the session."
         case .receiving:
-            return "Claude Code is sending usage to this app."
+            return "Claude Code is sending usage to Nocci."
         case .stale:
             return "No fresh quota reading has arrived for at least five minutes. The notch keeps the last known percentage in orange until its quota window expires. A new Claude Code status-line reading is needed; Refresh only rereads the saved file. Check that your active Claude Code is version 2.1.251 or later."
         case .conflict(let current):
@@ -231,12 +231,10 @@ enum ClaudeDisconnectMode {
 struct ClaudeDisconnectPreview {
     var settingsPath: String
     var restoresCommand: String?
-    var conflictingCommand: String?
 }
 
 struct ClaudeDisconnectOutcome: Equatable {
     var restoredCommand: String?
-    var removedStatusLine = false
     var keptCurrentCommand = false
     var remainingWrapperPath: String?
 }
@@ -262,7 +260,7 @@ enum ClaudeIntegrationError: LocalizedError, Equatable {
         case .malformedSettings(let path):
             return "\(path) isn’t valid JSON. Fix or move that file, then try again. Nothing was changed."
         case .unsupportedStatusLine(let path, let detail):
-            return "The status line already configured in \(path) isn’t one this app can extend: \(detail). Nothing was changed."
+            return "The status line already configured in \(path) isn’t one Nocci can extend: \(detail). Nothing was changed."
         case .unsupportedHooks(let path, let detail):
             return "The hooks already configured in \(path) aren’t in a shape Nocci can extend: \(detail). Nothing was changed."
         case .unreadableSettings(let path, let reason):
@@ -270,7 +268,7 @@ enum ClaudeIntegrationError: LocalizedError, Equatable {
         case .writeFailed(let path, let reason):
             return "Couldn’t write \(path). \(reason)"
         case .appUnavailable(let path):
-            return "Couldn’t find this app’s executable at \(path). Move Nocci to a stable location and try again."
+            return "Couldn’t find Nocci’s executable at \(path). Move Nocci to a stable location and try again."
         case .temporaryLocation:
             return "Nocci is running from a temporary copy that macOS removes later. Quit Nocci, move it to your Applications folder, open it from there and try again. Nothing was changed."
         }
@@ -636,12 +634,7 @@ struct ClaudeInstaller {
 
     func disconnectPlan() throws -> ClaudeDisconnectPreview {
         guard let stored = record() else { throw ClaudeIntegrationError.notInstalled }
-        let settings = try settingsObject()
-        let current = (settings?["statusLine"] as? [String: Any])?["command"] as? String
-        let conflict = current == stored.installedCommand ? nil : (current ?? "no status line")
-        return ClaudeDisconnectPreview(settingsPath: paths.settingsFile.path,
-                                       restoresCommand: stored.previousCommand,
-                                       conflictingCommand: conflict)
+        return ClaudeDisconnectPreview(settingsPath: paths.settingsFile.path, restoresCommand: stored.previousCommand)
     }
 
     @discardableResult
@@ -676,7 +669,6 @@ struct ClaudeInstaller {
                 outcome.restoredCommand = previous
             } else {
                 settings["statusLine"] = nil
-                outcome.removedStatusLine = true
             }
             if fm.fileExists(atPath: paths.settingsFile.path) || !settings.isEmpty {
                 try write(try settingsData(settings), to: paths.settingsFile.resolvingSymlinksInPath(), permissions: nil)

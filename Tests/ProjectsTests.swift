@@ -136,7 +136,7 @@ struct ProjectsTests {
         check(ProjectRules.emptyText(folders: [coding], states: [:], scanned: false, home: home) == "Reading folders…",
               "Before the first scan finishes the tile says it is reading")
         check(ProjectRules.emptyText(folders: [coding], states: [coding: .notAvailable], scanned: true, home: home)
-              == "~/Coding isn't available.", "A single missing folder is named")
+              == "~/Coding isn’t available.", "A single missing folder is named")
         check(ProjectRules.emptyText(folders: [coding, work], states: [coding: .notAvailable, work: .notAvailable], scanned: true, home: home)
               == "None of your project folders are available.", "Several missing folders are summarised")
         check(ProjectRules.emptyText(folders: [coding], states: [coding: .available], scanned: true, home: home)
@@ -219,7 +219,7 @@ struct ProjectsTests {
               == (ProjectAgent.codex.acceptsOptionTerminator ? nil : .leadingHyphen),
               "The same holds for Codex")
         check(ProjectRules.refusal(for: "-x", agent: .codex, target: .codexApp) == nil, "Links never read a prompt as an option")
-        check(PromptRefusal.leadingHyphen.message(for: .codex) == "A prompt for Codex can't start with a hyphen."
+        check(PromptRefusal.leadingHyphen.message(for: .codex) == "A prompt for Codex can’t start with a hyphen."
               && PromptRefusal.tooLong(limit: 32_768).message(for: .claude) == "This prompt is too long. The limit is 32 KB.",
               "Refusals explain themselves")
 
@@ -272,8 +272,8 @@ struct ProjectsTests {
               && ProjectRules.refusal(for: "a\u{0}b", agent: .codex, target: .nocci) == .nul
               && ProjectRules.refusal(for: String(repeating: "a", count: 32_769), agent: .claude, target: .nocci) == .tooLong(limit: 32_768),
               "Nocci's prompts follow the terminal rules")
-        check(ProjectRules.missingProgram(.claude) == "Claude Code wasn't found. Choose it in Settings › Projects."
-              && ProjectRules.missingProgram(.codex) == "Codex wasn't found. Choose it in Settings › Providers.",
+        check(ProjectRules.missingProgram(.claude) == "Claude Code wasn’t found. Choose it in Settings › Projects."
+              && ProjectRules.missingProgram(.codex) == "Codex wasn’t found. Choose it in Settings › Providers.",
               "A missing program says where to choose it")
 
         print("\(checks) projects checks passed")

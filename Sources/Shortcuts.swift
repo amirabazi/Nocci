@@ -53,7 +53,7 @@ struct GlobalShortcut: Equatable {
         var message: String {
             switch self {
             case .needsModifiers:
-                return "Use at least two modifier keys, such as Control-Option, so the shortcut can't take a key another app needs."
+                return "Use at least two modifier keys, such as Control-Option, so the shortcut can’t take a key another app needs."
             case .reserved:
                 return "macOS already uses that shortcut. Choose another."
             }

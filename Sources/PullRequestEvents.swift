@@ -32,8 +32,7 @@ struct PullRequestEvent: Equatable {
         case .checksFailed: title = "Checks failed"
         case .checksPassed: title = "Checks passed"
         }
-        // `provider` is not read by the delivery; it names no usage here.
-        return AlertMessage(provider: .codex, title: title, body: "\(item.repo) \(item.reference)",
+        return AlertMessage(title: title, body: "\(item.repo) \(item.reference)",
                             identifier: "nocci.pullRequest.\(kind).\(item.target.host)/\(item.repo)\(item.reference)")
     }
 }
@@ -95,7 +94,7 @@ struct PullRequestWatch: Equatable {
         var parts: [String] = []
         if reviews > 0 { parts.append("\(reviews) review request\(reviews == 1 ? "" : "s")") }
         if checks > 0 { parts.append("\(checks) finished check\(checks == 1 ? "" : "s")") }
-        return [AlertMessage(provider: .codex, title: "Pull requests", body: parts.joined(separator: " and "),
+        return [AlertMessage(title: "Pull requests", body: parts.joined(separator: " and "),
                              identifier: "nocci.pullRequest.summary")]
     }
 }

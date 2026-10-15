@@ -159,7 +159,7 @@ enum ProjectRules {
         if folders.isEmpty { return "Add a folder in Settings › Projects." }
         if !scanned { return "Reading folders…" }
         if folders.allSatisfy({ states[$0] == .notAvailable }) {
-            return folders.count == 1 ? "\(abbreviate(folders[0], home: home)) isn't available."
+            return folders.count == 1 ? "\(abbreviate(folders[0], home: home)) isn’t available."
                                       : "None of your project folders are available."
         }
         return folders.count == 1 ? "No projects in \(abbreviate(folders[0], home: home))." : "No projects in your folders."
@@ -276,9 +276,9 @@ enum PromptRefusal: Equatable {
 
     func message(for agent: ProjectAgent) -> String {
         switch self {
-        case .nul: return "This prompt contains a character that can't be passed on."
+        case .nul: return "This prompt contains a character that can’t be passed on."
         case .tooLong(let limit): return "This prompt is too long. The limit is \(limit / 1024) KB."
-        case .leadingHyphen: return "A prompt for \(agent.title) can't start with a hyphen."
+        case .leadingHyphen: return "A prompt for \(agent.title) can’t start with a hyphen."
         }
     }
 }
@@ -307,7 +307,7 @@ extension ProjectRules {
     }
 
     static func missingProgram(_ agent: ProjectAgent) -> String {
-        "\(agent.title) wasn't found. Choose it in Settings › \(agent == .claude ? "Projects" : "Providers")."
+        "\(agent.title) wasn’t found. Choose it in Settings › \(agent == .claude ? "Projects" : "Providers")."
     }
 
     /// The script deletes itself first, so the prompt is on

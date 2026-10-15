@@ -286,7 +286,7 @@ final class ClaudeSessionModel: ObservableObject {
     /// The project name and state only; nothing from the session itself.
     private func message(_ item: ClaudeSessionItem) -> AlertMessage {
         if item.record.state == .waiting {
-            return AlertMessage(provider: .codex, title: "Codex", body: "\(item.record.project ?? "A Codex session") needs you",
+            return AlertMessage(title: "Codex", body: "\(item.record.project ?? "A Codex session") needs you",
                                 identifier: "nocci.session.\(item.id)")
         }
         let name = item.record.project ?? "A Claude Code session"
@@ -296,7 +296,7 @@ final class ClaudeSessionModel: ObservableObject {
         case .question: body = "\(name) is asking a question"
         default: body = "\(name) finished: your turn"
         }
-        return AlertMessage(provider: .claude, title: "Claude Code", body: body, identifier: "nocci.session.\(item.id)")
+        return AlertMessage(title: "Claude Code", body: body, identifier: "nocci.session.\(item.id)")
     }
 
     private func setDemo(_ value: Bool) {

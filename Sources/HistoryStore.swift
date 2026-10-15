@@ -74,7 +74,7 @@ final class HistoryStore {
             if version == 0 {
                 // Version zero is accepted only for an empty database, not an unknown legacy schema.
                 guard try scalar("SELECT count(*) FROM sqlite_master WHERE type='table'") == 0 else {
-                    throw HistoryFailure(detail: "unrecognized database schema")
+                    throw HistoryFailure(detail: "unrecognised database schema")
                 }
                 try execute("""
                     BEGIN IMMEDIATE;

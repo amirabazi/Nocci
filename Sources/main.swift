@@ -546,13 +546,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         } else {
             let parent = NSMenuItem(title: "Presentation Mode", action: nil, keyEquivalent: "")
             let submenu = NSMenu()
-            for (title, minutes) in [("For 1 hour", 60), ("For 30 minutes", 30)] {
+            for (title, minutes) in [("For 1 Hour", 60), ("For 30 Minutes", 30)] {
                 let item = NSMenuItem(title: title, action: #selector(startTimedPresentation(_:)), keyEquivalent: "")
                 item.target = self
                 item.tag = minutes
                 submenu.addItem(item)
             }
-            let open = NSMenuItem(title: "Until I end it", action: #selector(startOpenPresentation), keyEquivalent: "")
+            let open = NSMenuItem(title: "Until I End It", action: #selector(startOpenPresentation), keyEquivalent: "")
             open.target = self
             submenu.addItem(open)
             parent.submenu = submenu
@@ -817,7 +817,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// A chosen file that cannot run is refused out loud rather than ignored.
     private func refuseNonExecutable(_ url: URL, program: String, example: String) {
         let alert = NSAlert()
-        alert.messageText = "\(url.lastPathComponent) isn't an executable"
+        alert.messageText = "\(url.lastPathComponent) isn’t an executable"
         alert.informativeText = "Choose the \(program) program itself, for example \(example)."
         NSApp.activate(ignoringOtherApps: true)
         alert.runModal()
@@ -829,7 +829,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func reviewProblem(_ message: String) {
         RunLoop.main.perform {
             let alert = NSAlert()
-            alert.messageText = "Couldn't start the code review"
+            alert.messageText = "Couldn’t start the code review"
             alert.informativeText = message
             NSApp.activate(ignoringOtherApps: true)
             alert.runModal()
@@ -907,7 +907,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if picker.runModal() == .OK, let url = picker.url {
             guard ProviderActionService.isApplicationBundle(url) else {
                 let alert = NSAlert()
-                alert.messageText = "\(url.lastPathComponent) isn't an app"
+                alert.messageText = "\(url.lastPathComponent) isn’t an app"
                 alert.informativeText = "Choose a terminal app, for example Ghostty or Warp."
                 alert.runModal()
                 return
@@ -1009,7 +1009,7 @@ func selfTest() {
     check(countdown(3 * 3600) == "Resets in 3h 0m" && countdown(2 * 86400 + 3 * 3600 + 59) == "Resets in 2d 3h",
           "Hours and days")
     check(countdown(0) == "Awaiting new window" && countdown(-5) == "Awaiting new window",
-          "A passed reset waits for the new window at the given time, not the wall clock's")
+          "A passed reset waits for the new window at the given time, not the wall clock’s")
     check(UsageParser.window(["usedPercent": 120.0], label: "x", kind: .session)?.used == 100, "Clamped bar")
     check(codex.windows.first?.kind == .session, "Codex primary is the session window")
     check(claude.windows[0].kind == .weekly, "Claude seven_day is the weekly window")

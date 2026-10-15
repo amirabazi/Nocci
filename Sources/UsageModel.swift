@@ -337,8 +337,7 @@ final class UsageModel: ObservableObject {
         precondition(Thread.isMainThread)
         guard !presentation.isActive(at: tick) else { return }
         delivery?.send(
-            AlertMessage(provider: .codex,
-                         title: "Nocci test",
+            AlertMessage(title: "Nocci test",
                          body: "Notifications are working. Click to open the notch.",
                          identifier: "nocci.test"),
             sound: alertPreferences.sound)

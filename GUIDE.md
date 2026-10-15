@@ -216,7 +216,7 @@ Launch at login is opt-in and is never enabled automatically on startup.
   Claude Code configuration, and the Providers tab keeps working while a provider is hidden.
 - **Percentages.** **Used** counts what you have consumed; **Remaining** counts what is left. The bars follow the
   numbers, so in Remaining mode they drain as you use your allowance. The underlying reading is the same either way.
-- **Compact notch.** Which window each provider's number beside the notch shows, chosen separately for Claude and
+- **Compact Notch.** Which window each provider's number beside the notch shows, chosen separately for Claude and
   for Codex. **Automatic** shows the session window and falls back to weekly when there is no session window.
   **Session** and **Weekly** show a dash rather than another window's figure when the provider did not report the
   one you picked.

@@ -297,7 +297,7 @@ final class CodexReader {
         case unavailable, timeout, disconnected, server
         var errorDescription: String? {
             switch self {
-            case .unavailable: return "Codex wasn't found. Install it and choose it with Set Up Codex, or hide Codex in Settings › Appearance."
+            case .unavailable: return "Codex wasn’t found. Install it and choose it with Set Up Codex, or hide Codex in Settings › Appearance."
             case .timeout: return "Codex took too long. Try refreshing."
             case .disconnected: return "Codex stopped answering. Check that codex login works in Terminal."
             case .server: return "Usage unavailable. Sign in with ChatGPT in Codex."

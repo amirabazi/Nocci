@@ -151,9 +151,9 @@ struct NotchView: View {
         Divider()
         if !model.sampleOnly {
             Menu("Presentation Mode") {
-                Button("For 1 hour") { model.presentation = PresentationState(minutes: 60, from: Date()) }
-                Button("For 30 minutes") { model.presentation = PresentationState(minutes: 30, from: Date()) }
-                Button("Until I end it") { model.presentation = .untilEnded }
+                Button("For 1 Hour") { model.presentation = PresentationState(minutes: 60, from: Date()) }
+                Button("For 30 Minutes") { model.presentation = PresentationState(minutes: 30, from: Date()) }
+                Button("Until I End It") { model.presentation = .untilEnded }
             }
         }
         Toggle("Keep Open", isOn: $model.pinned)
@@ -303,8 +303,8 @@ struct NotchView: View {
                 .glyphWell(active: model.pinned)
         }
         .buttonStyle(.plain)
-        .help(model.pinned ? "Unpin popup" : "Keep popup open")
-        .accessibilityLabel(model.pinned ? "Unpin popup" : "Keep popup open")
+        .help(model.pinned ? "Stop keeping the notch open" : "Keep the notch open")
+        .accessibilityLabel("Keep Open")
         .accessibilityValue(model.pinned ? "On" : "Off")
     }
 
@@ -319,9 +319,9 @@ struct NotchView: View {
             Divider()
             if !model.sampleOnly {
                 Menu("Presentation Mode") {
-                    Button("For 1 hour") { model.presentation = PresentationState(minutes: 60, from: Date()) }
-                    Button("For 30 minutes") { model.presentation = PresentationState(minutes: 30, from: Date()) }
-                    Button("Until I end it") { model.presentation = .untilEnded }
+                    Button("For 1 Hour") { model.presentation = PresentationState(minutes: 60, from: Date()) }
+                    Button("For 30 Minutes") { model.presentation = PresentationState(minutes: 30, from: Date()) }
+                    Button("Until I End It") { model.presentation = .untilEnded }
                 }
             }
             Toggle("Keep Open", isOn: $model.pinned)
@@ -571,7 +571,7 @@ struct ProviderCard: View {
                 if !message.isEmpty, snapshot?.windows.isEmpty == false {
                     Image(systemName: "exclamationmark.circle")
                         .font(.system(size: 12)).foregroundStyle(.orange)
-                        .help(message).accessibilityLabel("Couldn't update. \(message)")
+                        .help(message).accessibilityLabel("Couldn’t update. \(message)")
                 }
             }
 
@@ -622,7 +622,7 @@ struct ProviderCard: View {
     }
 
     private func paceDetail(_ pace: PaceEstimate) -> String {
-        guard pace.basisMinutes > 0 else { return "\(pace.verdict.summary). Estimate." }
+        guard pace.basisMinutes > 0 else { return "\(pace.verdict.summary)." }
         return "\(pace.verdict.summary). Estimate based on the last \(pace.basisMinutes) minutes of observed usage."
     }
 

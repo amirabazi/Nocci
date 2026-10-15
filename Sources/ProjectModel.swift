@@ -92,7 +92,7 @@ final class ProjectModel: ObservableObject {
     }
     var footerText: String {
         if demo { return "Sample data" }
-        if composing { return "Return starts · Esc goes back" }
+        if composing { return "Return starts · Escape goes back" }
         if showingTerminal { return "Click to type · Back keeps it running" }
         return ProjectRules.footer(count: projects.count, folders: settings.folders, states: folderStates, home: home)
     }
@@ -369,7 +369,7 @@ final class ProjectModel: ObservableObject {
                 self.selected = nil
             case .failure(let failure):
                 guard current else { return }
-                self.status = failure == .notPrepared ? "Nocci couldn't prepare the session." : "\(name) couldn't be opened."
+                self.status = failure == .notPrepared ? "Nocci couldn’t prepare the session." : "\(name) couldn’t be opened."
             }
         }
     }

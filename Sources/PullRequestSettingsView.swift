@@ -77,7 +77,7 @@ struct PullRequestSettingsForm: View {
             }
             if model.settings.enabled {
                 SettingsTile("Code Review", glyph: .symbol("text.magnifyingglass"),
-                             footer: "Experimental: not yet tried widely. Each pull request row gets a Code Review button. While Projects is on, it opens a Nocci terminal tab in your clone of that repository when your Projects folders hold one, otherwise in Nocci's review folder, and starts the agent on this prompt with whichever placeholders it uses filled in from that row. Placeholders: \(CodeReviewRules.placeholders.map { "{\($0)}" }.joined(separator: " ")). An empty prompt uses the default.") {
+                             footer: "Experimental: not yet tried widely. Each pull request row gets a Code Review button, which opens a Nocci terminal tab and starts the agent on this prompt, with whichever placeholders it uses filled in from that row. The review runs in your clone of that repository when Projects is on and its folders hold one, otherwise in Nocci’s review folder. Placeholders: \(CodeReviewRules.placeholders.map { "{\($0)}" }.joined(separator: " ")). An empty prompt uses the default.") {
                     SettingsRow("Agent") {
                         Picker("Agent", selection: $reviews.settings.agent) {
                             ForEach(ProjectAgent.allCases) { agent in Text(agent.title).tag(agent) }

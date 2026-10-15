@@ -55,7 +55,6 @@ struct ScreenCell: Equatable {
 struct ScreenRow {
     var cells: [ScreenCell]
     var cursor: Int?
-    var text: String { cells.map(\.character).joined() }
 }
 
 /// One tab's pseudo-terminal, child process and screen.

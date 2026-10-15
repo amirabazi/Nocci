@@ -112,7 +112,7 @@ extension UpdateService: SPUUpdaterDelegate {
                                        userInitiated: userInitiated) else {
             throw NSError(domain: "Nocci.UpdatePolicy", code: 1,
                           userInfo: [NSLocalizedDescriptionKey:
-                            "Automatic update checks are paused during Presentation Mode."])
+                            "Automatic checks are paused during Presentation Mode."])
         }
     }
 

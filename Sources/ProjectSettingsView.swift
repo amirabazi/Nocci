@@ -8,7 +8,7 @@ struct ProjectSettingsForm: View {
     var body: some View {
         SettingsPage {
             SettingsTile("Projects", glyph: .symbol("folder"),
-                         footer: "Adds a Projects tab to the expanded notch listing the folders inside the folders you choose. Pick one to start a Claude Code or Codex session there, with an optional first prompt. Nocci saves only these settings and never runs an AI model itself.") {
+                         footer: "Adds a Projects tab to the expanded notch that lists the projects in the folders you choose. Pick one to start a Claude Code or Codex session there, with an optional first prompt. Nocci saves only these settings and never runs an AI model itself.") {
                 SettingsToggle("Show projects in the notch", isOn: $model.settings.enabled)
             }
             SettingsTile("Folders", glyph: .symbol("folder.badge.plus"),
@@ -41,7 +41,7 @@ struct ProjectSettingsForm: View {
             SettingsTile("Programs", glyph: .symbol("chevron.left.forwardslash.chevron.right"),
                          footer: "Used when a session opens in a terminal. VS Code and the Codex app bring their own.") {
                 SettingsValue("Claude Code", model.claudePath.map { ProjectRules.abbreviate($0, home: model.home) } ?? "Not found")
-                Button("Choose claude Executable…") { model.onChooseClaude?() }
+                Button("Choose Claude Code Executable…") { model.onChooseClaude?() }
                 if ProcessInfo.processInfo.environment[ClaudeProgram.overrideKey] != nil {
                     Text("An environment override controls this executable for the current launch.")
                         .font(.callout).foregroundStyle(.secondary)

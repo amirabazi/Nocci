@@ -74,7 +74,7 @@ enum Diagnostics {
             // Worth stating here rather than cluttering the notch: refreshing
             // rereads Claude's file, it cannot make Claude Code produce one.
             DiagnosticRow(label: "Refresh behaviour",
-                          value: "Rereads Claude's saved snapshot and asks Codex directly. It cannot make Claude Code send a new reading.")
+                          value: "Rereads Claude’s saved snapshot and asks Codex directly. It cannot make Claude Code send a new reading.")
         ]
     }
 

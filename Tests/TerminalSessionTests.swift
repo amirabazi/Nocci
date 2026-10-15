@@ -326,3 +326,7 @@ struct TerminalSessionTests {
         print("\(checks) terminal session checks passed")
     }
 }
+
+extension ScreenRow {
+    var text: String { cells.map(\.character).joined() }
+}

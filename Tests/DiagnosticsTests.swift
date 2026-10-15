@@ -23,7 +23,7 @@ struct DiagnosticsTests {
               "A timeout is categorised")
         check(Diagnostics.category(for: "Codex stopped answering. Check that codex login works in Terminal.") == "disconnected",
               "A disconnection is categorised")
-        check(Diagnostics.category(for: "Codex wasn't found. Install it and choose it with Set Up Codex, or hide Codex in Settings › Appearance.") == "not configured",
+        check(Diagnostics.category(for: "Codex wasn’t found. Install it and choose it with Set Up Codex, or hide Codex in Settings › Appearance.") == "not configured",
               "A missing executable is categorised")
         check(Diagnostics.category(for: "Usage unavailable. Sign in with ChatGPT in Codex.") == "sign-in required",
               "A server refusal is categorised")
@@ -61,7 +61,7 @@ struct DiagnosticsTests {
             claudeConfigured: false, bridgePath: nil, bridgePresent: false,
             claudeStatus: "Not connected",
             lastClaudeEvent: nil, lastClaudeRead: nil, lastCodexRead: nil,
-            codexMessage: "Codex wasn't found. Install it and choose it with Set Up Codex, or hide Codex in Settings › Appearance.", now: now)
+            codexMessage: "Codex wasn’t found. Install it and choose it with Set Up Codex, or hide Codex in Settings › Appearance.", now: now)
         let emptyText = Diagnostics.text(Diagnostics.rows(empty))
         check(emptyText.contains("Codex executable: not found"), "A missing executable is stated plainly")
         check(emptyText.contains("Last Claude event: never"), "A provider that never reported says never")

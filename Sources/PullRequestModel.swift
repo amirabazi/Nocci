@@ -92,7 +92,6 @@ final class PullRequestModel: ObservableObject {
     var onSettings: (() -> Void)?
     var onChooseExecutable: ((Forge) -> Void)?
 
-    var truncated: Bool { !truncatedTargets.isEmpty }
     var activeFilter: PullRequestFilter { filter.resolved(for: settings) }
     var visibleTargets: [PullRequestTarget] { settings.targets.filter { activeFilter.includes($0) } }
     var visibleGroups: [RepoGroup] { activeFilter.apply(groups) }
