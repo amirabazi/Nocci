@@ -22,9 +22,9 @@ Everything beyond usage is off until you turn it on in Settings:
 
 ## Install
 
-Download the latest ZIP from [Releases](https://github.com/amirabazi/Nocci/releases), unzip it, move Nocci to Applications and open it from there. Then follow the [setup guide](GUIDE.md).
+Download [Nocci.dmg](https://github.com/amirabazi/Nocci/releases/latest/download/Nocci.dmg), open it, drag Nocci onto Applications and open it from there. Then follow the [setup guide](GUIDE.md). Every version is also on the [Releases](https://github.com/amirabazi/Nocci/releases) page.
 
-Nocci is not signed with an Apple Developer ID, so macOS blocks the first launch. Choose **Done** on the warning, then click **Open Anyway** in **System Settings › Privacy & Security**. The guide walks through it. You do this once.
+Nocci is not signed with an Apple Developer ID, so macOS blocks the first launch, saying Apple could not verify Nocci is free of malware. Choose **Done** on the warning, then click **Open Anyway** in **System Settings › Privacy & Security**. The guide walks through it. You do this once.
 
 ## What Nocci changes on your Mac
 

@@ -4,7 +4,7 @@ Nocci puts your Claude and Codex subscription usage beside the MacBook camera no
 
 ## Quick start
 
-1. **Install.** Download the ZIP from [Releases](https://github.com/amirabazi/Nocci/releases), unzip it and drag **Nocci.app** into **Applications**. Open it from there; the first launch needs one approval in System Settings (see [Install](#install)).
+1. **Install.** Download [Nocci.dmg](https://github.com/amirabazi/Nocci/releases/latest/download/Nocci.dmg), open it and drag **Nocci** onto **Applications**. Open it from Applications; the first launch needs one approval in System Settings (see [Install](#install)).
 2. **Claude.** Nocci opens **Settings › Providers** the first time. Choose **Enable Usage Tracking…**, read what it will change, and confirm. Your Claude usage appears after Claude Code next answers in a terminal session (Pro or Max plan, Claude Code 2.1.251 or later). The VS Code extension does not send usage; see [Claude shows a dash](#claude-shows-a-dash).
 3. **Codex.** If you use Codex, sign in once with `codex login` in Terminal. Nocci finds the Codex app or CLI by itself; if it does not, choose it with **Set Up Codex…** on the Codex card. If you don't use Codex, hide it in **Settings › Appearance**.
 4. **Hover the notch** to see your limits. Right-click it, or use the chart icon in the menu bar, for everything else.
@@ -16,15 +16,14 @@ Nocci has no server and no telemetry. Each person connects their own accounts; n
 
 ### Download the app
 
-1. Open [Releases](https://github.com/amirabazi/Nocci/releases).
-2. Download the ZIP whose name ends in `macos-arm64.zip`, for an Apple Silicon Mac (M1 or newer).
-3. Unzip it and drag **Nocci.app** into **Applications** before you open it. Opened straight from Downloads, macOS runs a temporary copy, and Nocci refuses to connect Claude Code from one, because that path disappears.
-4. Open the app and connect your providers using the instructions below.
+1. Download [Nocci.dmg](https://github.com/amirabazi/Nocci/releases/latest/download/Nocci.dmg), for an Apple Silicon Mac (M1 or newer). Each release is also on the [Releases](https://github.com/amirabazi/Nocci/releases) page, with a ZIP of the same app.
+2. Open it and drag **Nocci** onto the **Applications** folder in the window, then eject the disk image. Run from the disk image or from Downloads, macOS runs a temporary copy, and Nocci refuses to connect Claude Code from one, because that path disappears.
+3. Open Nocci from **Applications** and connect your providers using the instructions below.
 
 #### The first launch will be blocked, and that is expected
 
 Nocci is not signed with an Apple Developer ID and is not notarized, so macOS will
-refuse to open it the first time and say it cannot verify the developer. This is Gatekeeper
+refuse to open it the first time and say Apple could not verify Nocci is free of malware. This is Gatekeeper
 reacting to the absence of a paid Apple certificate, not to anything detected in the app.
 To open it:
 
@@ -387,7 +386,7 @@ clear its preferences.
 '../Nocci.app/Contents/MacOS/Nocci' --demo --expanded
 ```
 
-Version numbers come from `Config/Version.env`; bump `BUILD_NUMBER` for every published build. `Scripts/release.sh` produces a checksummed archive: notarized when a Developer ID identity is set, otherwise ad-hoc signed, in which case the first launch meets the Gatekeeper prompt described above. `Scripts/generate-appcast.sh` produces the update feed with Sparkle's `generate_appcast`, which signs it with the project's EdDSA update key, embeds the release notes and creates no delta files. `release.sh` needs `NOCCI_UPDATE_FEED_URL` and `NOCCI_UPDATE_PUBLIC_KEY`, release notes for the version in `ReleaseNotes/`, and a clean working tree; a fork that publishes its own builds needs its own feed and Sparkle key.
+Version numbers come from `Config/Version.env`; bump `BUILD_NUMBER` for every published build. `Scripts/release.sh` produces a checksummed ZIP for updates and `Nocci.dmg` for people to download (built by `Scripts/build-dmg.sh` with dmgbuild, which it installs into `.build/` from pinned hashes the first time, so that run needs Python 3 and network access). The app is notarized when a Developer ID identity is set, otherwise ad-hoc signed, in which case the first launch meets the Gatekeeper prompt described above. `Scripts/generate-appcast.sh` produces the update feed with Sparkle's `generate_appcast`, which signs it with the project's EdDSA update key, embeds the release notes and creates no delta files. `release.sh` needs `NOCCI_UPDATE_FEED_URL` and `NOCCI_UPDATE_PUBLIC_KEY`, release notes for the version in `ReleaseNotes/`, and a clean working tree; a fork that publishes its own builds needs its own feed and Sparkle key.
 
 Developer commands: `--check-codex` reads live limits; `--render /absolute/path.png` renders the demo view. `NOCCI_DATA_DIR` redirects Claude snapshots for tests; `NOCCI_CODEX_PATH` overrides saved preferences and CLI discovery. An invalid explicit path fails without falling back to another CLI, keeping fixture tests isolated from live accounts.
 
