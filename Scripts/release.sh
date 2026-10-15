@@ -68,7 +68,12 @@ ditto -c -k --sequesterRsrc --keepParent "$APP" "$FINAL_ZIP"
 (cd dist && shasum -a 256 "$BASENAME.zip") > "$FINAL_ZIP.sha256"
 # generate_appcast pairs notes with an archive by matching basename.
 cp "$NOTES" "dist/$BASENAME.md"
+# The disk image is what people download; the ZIP above stays the update archive.
+# Its name carries no version, so .../releases/latest/download/Nocci.dmg always works.
+Scripts/build-dmg.sh "$APP" "$ROOT/Nocci.dmg"
+(cd "$ROOT" && shasum -a 256 Nocci.dmg) > "$ROOT/Nocci.dmg.sha256"
 
 echo "Release archive: $FINAL_ZIP"
+echo "Disk image: $ROOT/Nocci.dmg"
 [[ "$NOTARIZE" == "1" ]] || echo "Not notarized: users bypass Gatekeeper once on first launch."
 echo "Next: run Scripts/generate-appcast.sh dist <download-url-prefix> [stable|preview]"
